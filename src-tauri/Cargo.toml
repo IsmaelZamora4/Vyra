@@ -1,0 +1,60 @@
+[package]
+name = "vyra"
+version = "0.1.0-alpha"
+description = "A Tauri App"
+authors = ["you"]
+edition = "2024"
+default-run = "vyra"
+
+[features]
+default = ["wry"]
+watchdog-bin = []
+tauri-dispatch-tests = ["tauri/test"]
+wry = [
+    "tauri/wry",
+    "tauri/compression",
+    "tauri/common-controls-v6",
+    "tauri/dynamic-acl",
+    "tauri/x11",
+    "tauri/dbus",
+]
+
+[[bin]]
+name = "vyra-watchdog"
+path = "src/watchdog/main.rs"
+required-features = ["watchdog-bin"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+# The `_lib` suffix may seem redundant but it is necessary
+# to make the lib name unique and wouldn't conflict with the bin name.
+# This seems to be only an issue on Windows, see https://github.com/rust-lang/cargo/issues/8519
+name = "vyra_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+sha2 = "0.11"
+
+[dependencies]
+tauri = { version = "2", default-features = false , features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+dirs = "7"
+getrandom = "0.3.4"
+sha2 = "0.11"
+windows = { version = "0.62", features = ["Win32_Graphics_Gdi", "Win32_Security", "Win32_System_Threading", "Win32_System_RemoteDesktop", "Win32_Storage_FileSystem", "Win32_UI_Magnification", "Win32_UI_WindowsAndMessaging"] }
+
+[dev-dependencies]
+# Build the real helper for plain `cargo test`, without adding it to Tauri's app binaries.
+vyra = { path = ".", default-features = false, features = ["watchdog-bin"] }
+
+
+# Read the optimization guideline for more details: https://tauri.app/concept/size/#cargo-configuration
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = 3
+panic = "abort"
+strip = true

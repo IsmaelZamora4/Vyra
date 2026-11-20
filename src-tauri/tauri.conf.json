@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "VYRA",
+  "version": "0.1.0-alpha",
+  "identifier": "com.vyra.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build:native",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "VYRA — Color Control",
+        "width": 1120,
+        "height": 780,
+        "minWidth": 640,
+        "minHeight": 500
+      }
+    ],
+    "security": { "csp": "default-src 'self'; img-src 'self' asset: http://asset.localhost; style-src 'self'; script-src 'self'" }
+  },
+  "bundle": {
+    "active": true,
+    "externalBin": ["binaries/vyra-watchdog"],
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}
