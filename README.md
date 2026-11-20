@@ -22,11 +22,11 @@ El instalador no está firmado digitalmente. Windows puede mostrar una advertenc
 
 ## Descargar e instalar
 
-1. Descarga **VYRA Phase 10 Validation** desde [Releases](https://github.com/IsmaelZamora4/Vyra/releases).
+1. Descarga `VYRA.Phase.10.Validation_0.1.0-alpha_x64-setup.exe` desde [Releases](https://github.com/IsmaelZamora4/Vyra/releases).
 2. En PowerShell, verifica el instalador descargado:
 
    ```powershell
-   Get-FileHash ".\VYRA Phase 10 Validation_0.1.0-alpha_x64-setup.exe" -Algorithm SHA256
+   Get-FileHash ".\VYRA.Phase.10.Validation_0.1.0-alpha_x64-setup.exe" -Algorithm SHA256
    ```
 
    SHA-256 esperado:
